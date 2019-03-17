@@ -5,9 +5,12 @@ class GroupsController < ApplicationController
   def index
     @groups = Group.all
   end
+
   def show
-   @group = Group.find(params[:id])
+    @group = Group.find(params[:id])
+    @posts = @group.posts
   end
+
   def edit
 
   end
@@ -15,6 +18,7 @@ class GroupsController < ApplicationController
   def new
    @group = Group.new
   end
+
   def create
    @group = Group.new(group_params)
     @group.user = current_user
@@ -35,7 +39,7 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    
+
 
     @group.destroy
     redirect_to groups_path, alert: "Group deleted"
